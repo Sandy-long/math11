@@ -3,82 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>策略游戏与数学练习</title>
+    <title>趣味数学11</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            max-width: 800px;
-            margin: 0 auto;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
             padding: 20px;
-            background-color: #f9f9f9;
+            max-width: 1000px;
+            margin: 0 auto;
         }
-        h1 {
-            color: #2c3e50;
+        
+        header {
             text-align: center;
             margin-bottom: 30px;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            color: white;
         }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 35px;
+            box-shadow: 0 7px 18px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e1ecf7;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.2);
+        }
+        
         h2 {
             color: #2980b9;
-            margin-top: 30px;
-            border-left: 4px solid #3498db;
-            padding-left: 10px;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #3498db;
+            font-size: 2rem;
+            position: relative;
         }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            border-radius: 10px;
+        }
+        
         h3 {
             color: #16a085;
-            margin-top: 20px;
+            margin: 30px 0 20px;
+            padding-left: 18px;
+            border-left: 5px solid #1abc9c;
+            font-size: 1.6rem;
         }
-        .section {
-            background-color: white;
-            border-radius: 8px;
+        
+        .rule {
+            background: linear-gradient(135deg, #f1f9fe 0%, #e3f2fd 100%);
             padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            margin: 25px 0;
+            border-left: 6px solid #3498db;
+            font-weight: 500;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
         }
+        
+        .question-container {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ebf5fb 100%);
+            padding: 20px 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border: 1px solid #e1ecf7;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.03);
+        }
+        
+        .question-container:hover {
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.25);
+            border-color: #aed6f1;
+        }
+        
         .question {
             font-weight: bold;
-            color: #2c3e50;
-            margin: 15px 0 5px 0;
-            padding: 10px;
-            background-color: #f8f9fa;
-            border-left: 3px solid #3498db;
-            border-radius: 4px;
+            color: #e74c3c;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            font-size: 1.2rem;
         }
-        .answer {
-            color: #27ae60;
-            margin: 0 0 15px 20px;
-            padding: 8px 12px;
-            background-color: #f1f9fe;
-            border-radius: 4px;
-            font-weight: bold;
+        
+        .question::before {
+            content: "❓";
+            margin-right: 12px;
+            color: #e74c3c;
+            font-size: 1.4em;
         }
-        .rule {
-            background-color: #f1f9fe;
-            padding: 12px;
-            border-radius: 6px;
+        
+        .answer-container {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 2px solid #c8f0dd;
+            border-radius: 10px;
+            padding: 5px 20px;
             margin: 15px 0;
-            border-left: 4px solid #3498db;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .answer-container:hover {
+            background: linear-gradient(135deg, #dcffe4 0%, #c6f6d5 100%);
+            transform: translateX(8px);
+            border-color: #8de0b7;
+        }
+        
+        .answer-prompt {
+            color: #0f9d58;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            font-size: 1.1rem;
+        }
+        
+        .answer-prompt::before {
+            content: "✨";
+            margin-right: 12px;
+            font-size: 1.5em;
+        }
+        
+        .answer {
+            color: #0d864a;
+            margin-left: 20px;
+            padding: 15px 20px;
+            background-color: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            border-radius: 0 12px 12px 0;
+            display: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            animation: fadeIn 0.6s ease;
+        }
+        
+        .show-answer .answer {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         /* 金币分配动画 */
         .coin-animation {
             width: 100%;
-            height: 150px;
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            margin: 15px auto;
+            height: 200px;
             position: relative;
+            margin: 30px auto;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
+        
         .coin {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             background: linear-gradient(135deg, #f1c40f, #f39c12);
             border-radius: 50%;
             position: absolute;
@@ -87,241 +206,244 @@
             align-items: center;
             color: white;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-size: 1.2rem;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
             animation: coinMove 6s infinite ease-in-out;
         }
+        
         .coin:nth-child(2) {
             animation-delay: 1s;
             background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            z-index: 2;
         }
+        
         .coin:nth-child(3) {
             animation-delay: 2s;
             background: linear-gradient(135deg, #e67e22, #d35400);
+            z-index: 1;
         }
+        
         @keyframes coinMove {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(50px, -20px) rotate(90deg); }
-            50% { transform: translate(0, -40px) rotate(180deg); }
-            75% { transform: translate(-50px, -20px) rotate(270deg); }
+            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            25% { transform: translate(70px, -40px) rotate(90deg) scale(1.2); }
+            50% { transform: translate(0, -70px) rotate(180deg) scale(1); }
+            75% { transform: translate(-70px, -40px) rotate(270deg) scale(0.9); }
         }
         
         /* 棋子摆放动画 */
         .chessboard-animation {
-            width: 250px;
-            height: 250px;
-            margin: 15px auto;
+            width: 300px;
+            height: 300px;
+            margin: 30px auto;
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             grid-template-rows: repeat(5, 1fr);
-            gap: 2px;
-            background-color: #333;
-            border: 2px solid #333;
-            border-radius: 5px;
+            gap: 4px;
+            background-color: #2c3e50;
+            border: 3px solid #34495e;
+            border-radius: 6px;
             position: relative;
         }
+        
         .chessboard-cell {
-            background-color: #fff;
+            background-color: #ecf0f1;
             display: flex;
             justify-content: center;
             align-items: center;
+            border-radius: 3px;
         }
+        
         .chess-piece {
-            width: 80%;
-            height: 80%;
+            width: 85%;
+            height: 85%;
             border-radius: 50%;
             background: linear-gradient(135deg, #e74c3c, #c0392b);
             animation: pieceRotate 8s infinite linear;
             position: relative;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
         }
+        
         .chess-piece::before {
             content: "";
             position: absolute;
             width: 30%;
             height: 30%;
-            background-color: rgba(255,255,255,0.8);
+            background-color: rgba(255,255,255,0.9);
             border-radius: 50%;
             top: 20%;
             left: 20%;
         }
+        
         @keyframes pieceRotate {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(90deg); }
-            50% { transform: rotate(180deg); }
-            75% { transform: rotate(270deg); }
-            100% { transform: rotate(360deg); }
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(90deg) scale(1.1); }
+            50% { transform: rotate(180deg) scale(1); }
+            75% { transform: rotate(270deg) scale(0.9); }
+            100% { transform: rotate(360deg) scale(1); }
         }
         
         /* 货币兑换动画 */
         .currency-animation {
             width: 100%;
-            height: 150px;
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            margin: 15px auto;
+            height: 180px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            margin: 30px auto;
             position: relative;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
+        
         .currency {
-            width: 80px;
-            height: 40px;
+            width: 100px;
+            height: 50px;
             background-color: white;
-            border-radius: 5px;
+            border-radius: 6px;
             display: flex;
             justify-content: center;
             align-items: center;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             position: absolute;
             animation: currencyExchange 6s infinite ease-in-out;
+            z-index: 2;
+            transition: all 0.3s ease;
         }
+        
         .currency.usd {
             background: linear-gradient(135deg, #2ecc71, #27ae60);
             color: white;
-            left: 20%;
+            left: 18%;
         }
+        
         .currency.cny {
             background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
-			left: 60%;
+            left: 42%;
             animation-delay: 1s;
         }
-        .currency.vnd {
+        
+        .currency.eur {
             background: linear-gradient(135deg, #e74c3c, #c0392b);
             color: white;
+            left: 66%;
             animation-delay: 2s;
         }
+        
         @keyframes currencyExchange {
             0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
-            25% { transform: translateY(-20px) scale(1.1); opacity: 0.8; }
+            25% { transform: translateY(-30px) scale(1.15); opacity: 0.9; }
             50% { transform: translateY(0) scale(1); opacity: 1; }
-            75% { transform: translateY(20px) scale(0.9); opacity: 0.8; }
+            75% { transform: translateY(30px) scale(0.85); opacity: 0.9; }
         }
         
         /* 成绩比较动画 */
         .score-animation {
             width: 100%;
-            height: 150px;
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            margin: 15px auto;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .score-bar {
-            width: 40px;
-            margin: 0 10px;
-            background-color: #3498db;
-            border-radius: 5px 5px 0 0;
+            height: 180px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            margin: 30px auto;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: flex-end;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            padding: 0 40px;
+        }
+        
+        .score-bar {
+            width: 70px;
+            margin: 0 20px;
+            background-color: #3498db;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
             color: white;
             font-weight: bold;
+            font-size: 1.3rem;
             overflow: hidden;
             animation: barGrow 4s infinite ease-in-out;
         }
+        
         .score-bar:nth-child(2) {
             background-color: #2ecc71;
             animation-delay: 0.5s;
         }
+        
         .score-bar:nth-child(3) {
             background-color: #e74c3c;
             animation-delay: 1s;
         }
+        
+        .score-bar::before {
+            content: attr(data-score);
+            position: absolute;
+            top: 15px;
+            font-size: 1.5rem;
+        }
+        
         @keyframes barGrow {
-            0%, 100% { height: 40px; }
-            50% { height: 100px; }
+            0%, 100% { height: 60px; }
+            50% { height: 140px; }
         }
         
-        /* 四则运算动画 */
-        .calculation-animation {
-            width: 100%;
-            height: 150px;
-            background-color: #f5f7fa;
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            color: #7f8c8d;
+            font-size: 1rem;
+            border-top: 1px solid #ecf0f1;
+            background: white;
             border-radius: 8px;
-            margin: 15px auto;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2em;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        .math-symbol {
-            animation: symbolBounce 2s infinite ease-in-out;
-            display: inline-block;
-        }
-        .math-symbol:nth-child(1) { animation-delay: 0s; }
-        .math-symbol:nth-child(2) { animation-delay: 0.2s; }
-        .math-symbol:nth-child(3) { animation-delay: 0.4s; }
-        .math-symbol:nth-child(4) { animation-delay: 0.6s; }
-        @keyframes symbolBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
         }
         
-        /* 和差倍动画 */
-        .comparison-animation {
-            width: 100%;
-            height: 150px;
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            margin: 15px auto;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .balance-scale {
-            width: 200px;
-            height: 80px;
-            position: relative;
-        }
-        .scale-beam {
-            width: 100%;
-            height: 10px;
-            background-color: #7f8c8d;
-            position: absolute;
-            top: 50%;
-            transform-origin: center;
-            animation: scaleTilt 4s infinite ease-in-out;
-        }
-        .scale-left, .scale-right {
-            width: 60px;
-            height: 40px;
-            background-color: #e74c3c;
-            border-radius: 5px;
-            position: absolute;
-            top: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-        }
-        .scale-left {
-            left: 0;
-        }
-        .scale-right {
-            right: 0;
-        }
-        @keyframes scaleTilt {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(10deg); }
-            50% { transform: rotate(-10deg); }
-            75% { transform: rotate(5deg); }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            header {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .chessboard-animation {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .score-animation {
+                padding: 0 20px;
+            }
+            
+            .score-bar {
+                width: 50px;
+                margin: 0 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>趣味数学11</h1>
+    <header>
+        <h1>趣味数学11</h1>
+        <p class="subtitle">探索策略游戏与数学应用的奇妙世界</p>
+    </header>
     
     <div class="section">
         <h2>策略游戏</h2>
@@ -332,27 +454,34 @@
             <div class="coin">2</div>
             <div class="coin">3</div>
         </div>
+        
         <div class="rule">
-            <strong>规则说明：</strong>每天按照特定规则分配金币，3天为一个完整周期。
+            <strong>规则说明：</strong>金币分配规则是周期性的，每个周期的分配模式可能不同。
         </div>
-        <div class="question">金币分配规则：第1天1枚，第2天2枚，第3天3枚，循环往复。求第7天获得多少金币？
-
-</div>
-        <div class="answer">​​1枚​</div>
-        <div class="question">金币分配规则：
-
-奇数周期（第1,3,5…个周期）：1, 3, 5枚，
-偶数周期：2, 4, 6枚，
-求第8天获得的金币数。
-
-</div>
-        <div class="answer">3枚</div>
-        <div class="question">分配规则：
-
-若前一天分配1枚，则当天分配2枚；
-否则分配1枚。
-已知第1天1枚，求第5天金币数。</div>
-        <div class="answer">​​1枚​</div>
+        
+        <div class="question-container">
+            <div class="question">金币分配规则：第1天1枚，第2天2枚，第3天3枚，循环往复。求第7天获得多少金币？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">第7天属于第3个周期的第1天，获得1枚金币</div>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <div class="question">金币分配规则：奇数周期（第1,3,5…个周期）：1, 3, 5枚；偶数周期：2, 4, 6枚；求第8天获得的金币数。</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">第8天属于第3个周期（奇数周期）的第2天，获得3枚金币</div>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <div class="question">分配规则：若前一天分配1枚，则当天分配2枚；否则分配1枚。已知第1天1枚，求第5天金币数。</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">第1天:1枚, 第2天:2枚, 第3天:1枚, 第4天:2枚, 第5天:1枚</div>
+            </div>
+        </div>
         
         <h3>2. 棋子摆放</h3>
         <div class="chessboard-animation">
@@ -382,21 +511,42 @@
             <div class="chessboard-cell"></div>
             <div class="chessboard-cell"></div>
         </div>
+        
         <div class="rule">
-            <strong>规则说明：</strong>在5×5棋盘上摆放棋子，棋子可以旋转/覆盖不同角度。
+            <strong>规则说明：</strong>在5×5棋盘上摆放棋子，考虑棋子的旋转和覆盖能力。
         </div>
-        <div class="question">在5×5棋盘放置L型棋子（占3格），棋子可旋转，求最多放置多少个？</div>
-        <div class="answer">7个</div>
-        <div class="question">一个棋子旋转几种不同姿态？</div>
-        <div class="answer"> 像俄罗斯方块里的形状一般有4种旋转姿态（0°、90°、180°、270°）；而像国际象棋中的国王和皇后，它们的形态对称，通常不考虑旋转，关注的是覆盖范围。</div>
-        <div class="question">在 5×5 棋盘 上，用象棋中的“国王”棋子（控制自己+周围8格），最少需要多少个国王，才能让所有 25 个格子都被控制（覆盖）？</div>
-        <div class="answer">9个</div>
-		 <div class="question">在 5×5 棋盘上，每枚棋子能控制所在的行、列和两条对角线，问：最少需要放几枚这样的棋子，能让所有格子都被控制？</div>
-        <div class="answer">5枚</div>
-		<div class="question">用占4格的Z型棋子（可镜像+旋转）覆盖5×5棋盘，求最少剩余格子数</div>
-        <div class="answer">剩余1格，25 mod 4=1</div>
-		
-		
+        
+        <div class="question-container">
+            <div class="question">在5×5棋盘放置L型棋子（占3格），棋子可旋转，求最多放置多少个？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">7个（棋盘共25格，每个L型占3格，7个占21格）</div>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <div class="question">一个棋子旋转几种不同姿态？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">4种旋转姿态（0°、90°、180°、270°）</div>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <div class="question">在5×5棋盘上，每枚棋子能控制所在的行、列和两条对角线，问：最少需要放几枚这样的棋子，能让所有格子都被控制？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">5枚（通过放在对角线位置可覆盖全棋盘）</div>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <div class="question">用占4格的Z型棋子（可镜像+旋转）覆盖5×5棋盘，求最少剩余格子数</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">1格（25 ÷ 4 = 6个Z型棋子覆盖24格，剩余1格）</div>
+            </div>
+        </div>
     </div>
     
     <div class="section">
@@ -406,35 +556,108 @@
         <div class="currency-animation">
             <div class="currency usd">USD</div>
             <div class="currency cny">CNY</div>
-            <div class="currency vnd">EUR</div>
+            <div class="currency eur">EUR</div>
         </div>
+        
         <div class="rule">
-            <strong>汇率规则：</strong><br>1 美元（USD） ≈ 7.168 人民币（CNY）<br>1 欧元（EUR） ≈ 7.93 人民币（CNY）<br>1 美元（USD） ≈ 0.90 欧元（EUR）
+            <strong>汇率规则：</strong>
+            <ul>
+                <li>1 美元（USD） ≈ 7.168 人民币（CNY）</li>
+                <li>1 欧元（EUR） ≈ 7.93 人民币（CNY）</li>
+                <li>1 美元（USD） ≈ 0.90 欧元（EUR）</li>
+            </ul>
         </div>
-        <div class="question">1美元=7.17人民币，80美元等于多少人民币？</div>
-        <div class="answer">约573.6元人民币</div>
-        <div class="question">1万欧元换算成人民币是多少？</div>
-        <div class="answer">79300元人民币</div>
-        <div class="question">50欧元换算成多少美元？</div>
-        <div class="answer">约55.6万美元</div>
+        
+        <div class="question-container">
+            <div class="question">1美元=7.17人民币，80美元等于多少人民币？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">80 × 7.17 = 573.6元人民币</div>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <div class="question">1万欧元换算成人民币是多少？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">10000 × 7.93 = 79300元人民币</div>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <div class="question">50欧元换算成多少美元？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">50 × (1/0.90) ≈ 55.56美元</div>
+            </div>
+        </div>
         
         <h3>2. 成绩比较</h3>
         <div class="score-animation">
-            <div class="score-bar" style="height: 80px;">80</div>
-            <div class="score-bar" style="height: 60px;">60</div>
-            <div class="score-bar" style="height: 90px;">90</div>
+            <div class="score-bar" data-score="80" style="background-color: #3498db;"></div>
+            <div class="score-bar" data-score="85" style="background-color: #2ecc71;"></div>
+            <div class="score-bar" data-score="90" style="background-color: #e74c3c;"></div>
         </div>
+        
         <div class="rule">
-            <strong>解题方法：</strong>根据题目描述建立方程，解方程求未知数。
+            <strong>解题方法：</strong>根据题目描述建立数学关系，解方程求未知数。
         </div>
-        <div class="question">考试占比：期中30%，期末70%。甲期中80期末90，乙期中85期末88，谁最终成绩高？</div>
-        <div class="answer">​乙略高</div>
-        <div class="question">阿明得分是阿强3倍，阿强比阿明少15分，求阿明得分。</div>
-        <div class="answer">45分</div>
-        <div class="question">甲从70分升到80分，乙从85分升到90分，谁进步更大？</div>
-        <div class="answer">甲进步更大​​</div>
+        
+        <div class="question-container">
+            <div class="question">考试占比：期中30%，期末70%。甲期中80分期末90分，乙期中85分期末88分，谁最终成绩高？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">
+                    甲成绩: (80×0.3) + (90×0.7) = 24 + 63 = 87分<br>
+                    乙成绩: (85×0.3) + (88×0.7) = 25.5 + 61.6 = 87.1分<br>
+                    乙成绩略高
+                </div>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <div class="question">阿明得分是阿强3倍，阿强比阿明少15分，求阿明得分。</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">
+                    设阿强得分x，则阿明得分3x<br>
+                    3x - x = 15 → 2x = 15 → x = 7.5<br>
+                    阿明得分: 3×7.5 = 22.5分
+                </div>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <div class="question">甲从70分升到80分，乙从85分升到90分，谁进步更大？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">
+                    甲提升: 80 - 70 = 10分<br>
+                    乙提升: 90 - 85 = 5分<br>
+                    甲进步更大
+                </div>
+            </div>
+        </div>
     </div>
     
-   
+    
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为所有答案容器添加点击事件
+            const containers = document.querySelectorAll('.answer-container');
+            containers.forEach(container => {
+                container.addEventListener('click', function() {
+                    this.classList.toggle('show-answer');
+                });
+            });
+            
+            // 更新动态条形图显示分数
+            document.querySelectorAll('.score-bar').forEach(bar => {
+                const score = bar.getAttribute('data-score');
+                bar.style.height = `${score * 1.4}px`;
+            });
+        });
+    </script>
 </body>
 </html>
